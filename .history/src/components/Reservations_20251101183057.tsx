@@ -206,9 +206,7 @@ export default function Reservations() {
 
     try {
       // Send email notification using our email service
-      const totalAmount = calculateTotal();
-      const selectedItemsWithPrices = getSelectedItemsWithPrices();
-      const emailSent = await sendReservationEmail(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number}>);
+      const emailSent = await sendReservationEmail(formData);
 
       if (!emailSent) {
         throw new Error('Email sending failed');

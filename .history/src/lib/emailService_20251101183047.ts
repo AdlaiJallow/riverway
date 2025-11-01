@@ -1,6 +1,6 @@
 // Email service for sending reservation notifications
 
-interface OrderData {
+interface ReservationData {
   name: string;
   email: string;
   phone: string;
@@ -10,48 +10,56 @@ interface OrderData {
   specialRequests: string;
 }
 
-export const sendReservationEmail = async (orderData: OrderData, totalAmount: number, selectedItemsWithPrices: Array<{name: string, price: number}>): Promise<boolean> => {
+export const sendReservationEmail = async (reservationData: ReservationData): Promise<boolean> => {
   const businessEmail = 'adlaijallow@gmail.com';
   
-  const orderTypeText = orderData.orderType === 'delivery' ? 'Delivery' : 'Pickup';
+  // Format the date and time for better readability
+  const formattedDate = new Date(reservationData.date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  const formattedTime = new Date(`1970-01-01T${reservationData.time}`).toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  const subject = `🍽️ New Riverway Reservation - ${reservationData.name}`;
   
-  const subject = `🍽️ New Riverway Order - ${orderData.name}`;
-  
-  const itemsText = selectedItemsWithPrices.length > 0 
-    ? selectedItemsWithPrices.map(item => `${item.name} - D${item.price}`).join('\n') 
-    : 'No items selected';
+  const selectedItems = reservationData.selectedMenuItems.length > 0 
+    ? reservationData.selectedMenuItems.join(', ') 
+    : 'No specific items selected - customer will order at restaurant';
 
   const emailBody = `
-NEW ORDER REQUEST FOR RIVERWAY RESTAURANT
-========================================
+NEW RESERVATION REQUEST FOR RIVERWAY RESTAURANT
+=============================================
 
-📞 URGENT: Please contact customer to confirm and prepare order!
+📞 URGENT: Please contact customer within 24 hours to confirm!
 
 CUSTOMER INFORMATION:
-👤 Name: ${orderData.name}
-📧 Email: ${orderData.email}
-📱 Phone: ${orderData.phone}
+👤 Name: ${reservationData.name}
+📧 Email: ${reservationData.email}
+📱 Phone: ${reservationData.phone}
 
-ORDER DETAILS:
-� Type: ${orderTypeText}
-� ${orderData.orderType === 'delivery' ? `Address: ${orderData.address}` : 'Pickup Location: Brusubi Phase 2, Opposite Police Station'}
-
-🍽️ ITEMS ORDERED:
-${itemsText}
-
-💰 TOTAL AMOUNT: D${totalAmount}
-💬 Special Requests: ${orderData.specialRequests || 'None'}
+RESERVATION DETAILS:
+📅 Date: ${formattedDate}
+🕒 Time: ${formattedTime}
+🍽️ Pre-Selected Menu Items: ${selectedItems}
+💬 Special Requests: ${reservationData.specialRequests || 'None'}
 
 NEXT STEPS:
-1. Call the customer to confirm order
-2. Prepare the ordered items
-3. ${orderData.orderType === 'delivery' ? 'Arrange delivery to provided address' : 'Notify customer when ready for pickup'}
-4. Collect payment on ${orderData.orderType === 'delivery' ? 'delivery' : 'pickup'}
+1. Call the customer to confirm availability
+2. Prepare the pre-selected dishes or discuss menu options
+3. Confirm any dietary requirements or modifications
+4. Send confirmation details to customer
 
 Contact Numbers: +220 3939528 / +220 9957606
 Restaurant Location: Brusubi Phase 2, Opposite Police Station
 
-This order was submitted through the Riverway website.
+This reservation was submitted through the Riverway website.
   `.trim();
 
   try {
@@ -91,7 +99,7 @@ This order was submitted through the Riverway website.
 };
 
 // Alternative: WhatsApp message (popular in The Gambia)
-export const sendWhatsAppNotification = (orderData: OrderData, totalAmount: number, selectedItemsWithPrices: Array<{name: string, price: number}>): void => {
+export const sendWhatsAppNotification = (orderData: ReservationData, totalAmount: number, selectedItemsWithPrices: Array<{name: string, price: number}>): void => {
   const phoneNumber = '2203939528'; // Your business WhatsApp number (without +)
   
   const orderTypeText = orderData.orderType === 'delivery' ? 'Delivery' : 'Pickup';

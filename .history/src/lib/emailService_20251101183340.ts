@@ -91,7 +91,7 @@ This order was submitted through the Riverway website.
 };
 
 // Alternative: WhatsApp message (popular in The Gambia)
-export const sendWhatsAppNotification = (orderData: OrderData, totalAmount: number, selectedItemsWithPrices: Array<{name: string, price: number}>): void => {
+export const sendWhatsAppNotification = (orderData: ReservationData, totalAmount: number, selectedItemsWithPrices: Array<{name: string, price: number}>): void => {
   const phoneNumber = '2203939528'; // Your business WhatsApp number (without +)
   
   const orderTypeText = orderData.orderType === 'delivery' ? 'Delivery' : 'Pickup';
