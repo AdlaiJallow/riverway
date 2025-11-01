@@ -21,20 +21,20 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-white">
-        <Navigation currentPage={currentPage} setCurrentPage={handlePageChange} />
+        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
         {currentPage === 'home' && (
           <>
-            <Hero setCurrentPage={handlePageChange} />
+            <Hero setCurrentPage={setCurrentPage} />
             <Gallery />
           </>
         )}
 
-        {currentPage === 'menu' && <Menu setCurrentPage={handlePageChange} />}
+        {currentPage === 'menu' && <Menu setCurrentPage={setCurrentPage} />}
         {currentPage === 'about' && <About />}
         {currentPage === 'orders' && <Reservations />}
 
-        <Footer setCurrentPage={handlePageChange} />
+        <Footer setCurrentPage={setCurrentPage} />
       </div>
     </ErrorBoundary>
   );
