@@ -80,13 +80,13 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Description */}
-            <div className={`space-y-4 sm:space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed font-light">
+            <div className={`space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed font-light">
                 After extensive recipe development, we're back <span className="font-semibold text-amber-700">stronger and fresher</span> than ever. 
                 Thoughtfully crafted dishes designed to elevate your dining experience and satisfy every palate.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                 Inspired by the vitality and continuity of the <span className="font-semibold text-blue-700">River Gambia</span>, 
                 we bring authentic, rooted cuisine that flows with new flavors and experiences.
               </p>

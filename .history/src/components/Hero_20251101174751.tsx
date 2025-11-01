@@ -24,7 +24,7 @@ export default function Hero({ setCurrentPage }: HeroProps) {
     return () => clearInterval(interval);
   }, [highlights.length]);
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 min-h-screen flex items-center pt-16 sm:pt-0">
+    <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 min-h-screen flex items-center">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-gradient-to-br from-blue-200 to-blue-100 rounded-full mix-blend-multiply filter blur-2xl sm:blur-3xl opacity-20 sm:opacity-30 animate-float"></div>
@@ -32,7 +32,7 @@ export default function Hero({ setCurrentPage }: HeroProps) {
         <div className="absolute top-1/2 left-1/4 sm:left-1/3 w-40 sm:w-64 h-40 sm:h-64 bg-gradient-to-br from-green-200 to-blue-200 rounded-full mix-blend-multiply filter blur-xl sm:blur-3xl opacity-15 sm:opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
           <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
@@ -80,13 +80,13 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Description */}
-            <div className={`space-y-4 sm:space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed font-light">
+            <div className={`space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed font-light">
                 After extensive recipe development, we're back <span className="font-semibold text-amber-700">stronger and fresher</span> than ever. 
                 Thoughtfully crafted dishes designed to elevate your dining experience and satisfy every palate.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                 Inspired by the vitality and continuity of the <span className="font-semibold text-blue-700">River Gambia</span>, 
                 we bring authentic, rooted cuisine that flows with new flavors and experiences.
               </p>
@@ -177,16 +177,16 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Floating Action Cards */}
-            <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-100 transform rotate-2 sm:rotate-3 hover:rotate-0 transition-all duration-300 hidden sm:block">
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="w-2 sm:w-3 h-2 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs sm:text-sm font-semibold text-gray-700">Open Now</span>
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 transform rotate-3 hover:rotate-0 transition-all duration-300">
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-gray-700">Open Now</span>
               </div>
             </div>
 
-            <div className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-xl transform -rotate-2 sm:-rotate-3 hover:rotate-0 transition-all duration-300 hidden sm:block">
+            <div className="absolute -top-6 -right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-2xl p-4 shadow-xl transform -rotate-3 hover:rotate-0 transition-all duration-300">
               <div className="text-center">
-                <div className="text-sm sm:text-lg font-bold">New!</div>
+                <div className="text-lg font-bold">New!</div>
                 <div className="text-xs opacity-90">Menu Items</div>
               </div>
             </div>

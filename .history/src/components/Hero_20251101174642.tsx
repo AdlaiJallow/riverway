@@ -24,7 +24,7 @@ export default function Hero({ setCurrentPage }: HeroProps) {
     return () => clearInterval(interval);
   }, [highlights.length]);
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 min-h-screen flex items-center pt-16 sm:pt-0">
+    <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 min-h-screen flex items-center">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-gradient-to-br from-blue-200 to-blue-100 rounded-full mix-blend-multiply filter blur-2xl sm:blur-3xl opacity-20 sm:opacity-30 animate-float"></div>
@@ -32,10 +32,10 @@ export default function Hero({ setCurrentPage }: HeroProps) {
         <div className="absolute top-1/2 left-1/4 sm:left-1/3 w-40 sm:w-64 h-40 sm:h-64 bg-gradient-to-br from-green-200 to-blue-200 rounded-full mix-blend-multiply filter blur-xl sm:blur-3xl opacity-15 sm:opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
+          <div className={`space-y-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
             {/* Badge */}
             <div className="inline-block">
               <div className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-amber-100 to-blue-100 rounded-full border border-amber-200">
@@ -58,21 +58,21 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Rotating Highlights */}
-            <div className="h-12 sm:h-16 flex items-center overflow-hidden">
-              <div className="flex items-center space-x-2 sm:space-x-3 transition-all duration-500">
+            <div className="h-12 sm:h-16 flex items-center">
+              <div className="flex items-center space-x-2 sm:space-x-3 transition-all duration-500 overflow-x-auto">
                 {highlights.map((highlight, index) => {
                   const Icon = highlight.icon;
                   return (
                     <div 
                       key={index}
-                      className={`flex items-center space-x-1 sm:space-x-2 transition-all duration-500 flex-shrink-0 ${
+                      className={`flex items-center space-x-1 sm:space-x-2 transition-all duration-500 whitespace-nowrap ${
                         currentSlide === index 
-                          ? 'opacity-100 scale-100' 
-                          : 'opacity-0 scale-95 absolute'
+                          ? 'opacity-100 scale-100 translate-x-0' 
+                          : 'opacity-30 scale-95 translate-x-2'
                       }`}
                     >
                       <Icon className={`w-4 sm:w-6 h-4 sm:h-6 ${highlight.color}`} />
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base whitespace-nowrap">{highlight.text}</span>
+                      <span className="font-semibold text-gray-800 text-sm sm:text-base">{highlight.text}</span>
                     </div>
                   );
                 })}
@@ -80,13 +80,13 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Description */}
-            <div className={`space-y-4 sm:space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed font-light">
+            <div className={`space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed font-light">
                 After extensive recipe development, we're back <span className="font-semibold text-amber-700">stronger and fresher</span> than ever. 
                 Thoughtfully crafted dishes designed to elevate your dining experience and satisfy every palate.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                 Inspired by the vitality and continuity of the <span className="font-semibold text-blue-700">River Gambia</span>, 
                 we bring authentic, rooted cuisine that flows with new flavors and experiences.
               </p>
@@ -129,19 +129,19 @@ export default function Hero({ setCurrentPage }: HeroProps) {
           </div>
 
           {/* Right Content */}
-          <div className={`relative mt-8 lg:mt-0 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
+          <div className={`relative transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
             {/* Main Card */}
             <div className="relative group">
               {/* Animated Background Glow */}
-              <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-br from-blue-200 via-amber-100 to-blue-100 rounded-3xl blur-2xl sm:blur-3xl group-hover:blur-xl sm:group-hover:blur-2xl transition-all duration-500 animate-pulse-glow"></div>
+              <div className="absolute -inset-8 bg-gradient-to-br from-blue-200 via-amber-100 to-blue-100 rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500 animate-pulse-glow"></div>
               
               {/* Card Content */}
               <div className="relative bg-gradient-to-br from-white via-blue-50 to-amber-50 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-blue-100 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
                 {/* Decorative Elements */}
-                <div className="absolute top-4 sm:top-6 right-4 sm:right-6 w-12 sm:w-20 h-12 sm:h-20 bg-gradient-to-br from-amber-400 to-blue-500 rounded-full opacity-10 animate-spin" style={{ animationDuration: '10s' }}></div>
-                <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 w-10 sm:w-16 h-10 sm:h-16 bg-gradient-to-br from-blue-400 to-amber-500 rounded-full opacity-10 animate-float"></div>
+                <div className="absolute top-6 right-6 w-20 h-20 bg-gradient-to-br from-amber-400 to-blue-500 rounded-full opacity-10 animate-spin" style={{ animationDuration: '10s' }}></div>
+                <div className="absolute bottom-6 left-6 w-16 h-16 bg-gradient-to-br from-blue-400 to-amber-500 rounded-full opacity-10 animate-float"></div>
 
-                <div className="relative z-10 space-y-4 sm:space-y-6 lg:space-y-8">
+                <div className="relative z-10 space-y-8">
                   {/* Logo Section */}
                   <div className="relative group/logo">
                     <div className="relative aspect-square bg-gradient-to-br from-white to-blue-50 rounded-3xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-blue-100 group-hover/logo:border-amber-200 transition-all duration-500">
@@ -155,17 +155,17 @@ export default function Hero({ setCurrentPage }: HeroProps) {
                   </div>
 
                   {/* Story Section */}
-                  <div className="space-y-4 sm:space-y-6">
+                  <div className="space-y-6">
                     <div className="text-center">
-                      <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-amber-100 to-blue-100 rounded-full border border-amber-200 mb-3 sm:mb-4">
-                        <Star className="w-3 sm:w-4 h-3 sm:h-4 text-amber-600" />
-                        <span className="text-amber-800 font-semibold text-xs sm:text-sm">Our Heritage</span>
+                      <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-blue-100 rounded-full border border-amber-200 mb-4">
+                        <Star className="w-4 h-4 text-amber-600" />
+                        <span className="text-amber-800 font-semibold text-sm">Our Heritage</span>
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">The Riverway Story</h3>
-                      <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-amber-500 to-blue-500 rounded-full mx-auto mb-4 sm:mb-6"></div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">The Riverway Story</h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-amber-500 to-blue-500 rounded-full mx-auto mb-6"></div>
                     </div>
                     
-                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed text-center">
+                    <p className="text-gray-700 leading-relaxed text-center">
                       Connected to The Gambia, a nation defined by the majestic 
                       <span className="font-semibold text-blue-700"> River Gambia</span> that flows from end to end, 
                       inspiring <span className="font-semibold text-amber-700">vitality</span> and 
@@ -177,16 +177,16 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Floating Action Cards */}
-            <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-xl border border-gray-100 transform rotate-2 sm:rotate-3 hover:rotate-0 transition-all duration-300 hidden sm:block">
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="w-2 sm:w-3 h-2 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs sm:text-sm font-semibold text-gray-700">Open Now</span>
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 transform rotate-3 hover:rotate-0 transition-all duration-300">
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-gray-700">Open Now</span>
               </div>
             </div>
 
-            <div className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-xl transform -rotate-2 sm:-rotate-3 hover:rotate-0 transition-all duration-300 hidden sm:block">
+            <div className="absolute -top-6 -right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-2xl p-4 shadow-xl transform -rotate-3 hover:rotate-0 transition-all duration-300">
               <div className="text-center">
-                <div className="text-sm sm:text-lg font-bold">New!</div>
+                <div className="text-lg font-bold">New!</div>
                 <div className="text-xs opacity-90">Menu Items</div>
               </div>
             </div>

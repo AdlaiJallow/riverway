@@ -32,7 +32,7 @@ export default function Hero({ setCurrentPage }: HeroProps) {
         <div className="absolute top-1/2 left-1/4 sm:left-1/3 w-40 sm:w-64 h-40 sm:h-64 bg-gradient-to-br from-green-200 to-blue-200 rounded-full mix-blend-multiply filter blur-xl sm:blur-3xl opacity-15 sm:opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
           <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
@@ -80,13 +80,13 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Description */}
-            <div className={`space-y-4 sm:space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed font-light">
+            <div className={`space-y-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed font-light">
                 After extensive recipe development, we're back <span className="font-semibold text-amber-700">stronger and fresher</span> than ever. 
                 Thoughtfully crafted dishes designed to elevate your dining experience and satisfy every palate.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                 Inspired by the vitality and continuity of the <span className="font-semibold text-blue-700">River Gambia</span>, 
                 we bring authentic, rooted cuisine that flows with new flavors and experiences.
               </p>
