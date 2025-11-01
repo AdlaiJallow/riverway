@@ -58,21 +58,21 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Rotating Highlights */}
-            <div className="h-12 sm:h-16 flex items-center">
-              <div className="flex items-center space-x-2 sm:space-x-3 transition-all duration-500 overflow-x-auto">
+            <div className="h-16 flex items-center">
+              <div className="flex items-center space-x-3 transition-all duration-500">
                 {highlights.map((highlight, index) => {
                   const Icon = highlight.icon;
                   return (
                     <div 
                       key={index}
-                      className={`flex items-center space-x-1 sm:space-x-2 transition-all duration-500 whitespace-nowrap ${
+                      className={`flex items-center space-x-2 transition-all duration-500 ${
                         currentSlide === index 
                           ? 'opacity-100 scale-100 translate-x-0' 
                           : 'opacity-30 scale-95 translate-x-2'
                       }`}
                     >
-                      <Icon className={`w-4 sm:w-6 h-4 sm:h-6 ${highlight.color}`} />
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base">{highlight.text}</span>
+                      <Icon className={`w-6 h-6 ${highlight.color}`} />
+                      <span className="font-semibold text-gray-800">{highlight.text}</span>
                     </div>
                   );
                 })}

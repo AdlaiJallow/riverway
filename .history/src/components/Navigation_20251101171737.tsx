@@ -19,9 +19,9 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-3 cursor-pointer p-2 -m-2 touch-target" onClick={() => setCurrentPage('home')}>
-            <img src="/logo copy.jpeg" alt="Riverway Logo" className="h-8 sm:h-10 w-8 sm:w-10 object-contain" />
-            <span className="text-lg sm:text-xl font-bold text-gray-900">Riverway</span>
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setCurrentPage('home')}>
+            <img src="/logo copy.jpeg" alt="Riverway Logo" className="h-10 w-10 object-contain" />
+            <span className="text-xl font-bold text-gray-900">Riverway</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -61,7 +61,7 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
                     setCurrentPage(item.id);
                     setIsMenuOpen(false);
                   }}
-                  className={`block w-full text-left px-4 py-3 text-base font-medium rounded-md transition-colors touch-target ${
+                  className={`block w-full text-left px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     currentPage === item.id
                       ? 'text-amber-700 bg-amber-50'
                       : 'text-gray-600 hover:text-amber-700 hover:bg-amber-50'

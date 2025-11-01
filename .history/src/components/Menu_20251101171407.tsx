@@ -143,7 +143,7 @@ export default function Menu({ setCurrentPage }: MenuProps) {
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
             
             {/* Menu Card */}
-            <div className="bg-gradient-to-br from-white via-amber-50 to-blue-50 rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-amber-200 group-hover:shadow-3xl transition-all duration-500">
+            <div className="relative bg-gradient-to-br from-white via-amber-50 to-blue-50 rounded-3xl p-8 shadow-2xl border border-amber-200 group-hover:shadow-3xl transition-all duration-500">
               {/* Card Header */}
               <div className="text-center mb-8">
                 <div className="inline-flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-amber-500 to-blue-500 text-white rounded-full shadow-lg mb-4">
@@ -216,8 +216,8 @@ export default function Menu({ setCurrentPage }: MenuProps) {
           }`}
         >
           <div className="bg-gradient-to-r from-amber-600 to-blue-600 text-white rounded-3xl p-12 shadow-2xl">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Ready to Experience Our Flavors?</h3>
-            <p className="text-lg sm:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Ready to Experience Our Flavors?</h3>
+            <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
               Join us for an authentic culinary journey through The Gambia's finest dishes
             </p>
             <button 

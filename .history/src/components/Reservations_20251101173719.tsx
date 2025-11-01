@@ -547,17 +547,17 @@ export default function Reservations() {
                               />
                               <div className="flex-1">
                                 <div className="flex justify-between items-start mb-2">
-                                  <div className="flex-1 pr-2">
-                                    <span className="text-sm sm:text-base font-semibold text-gray-900">{item.name}</span>
+                                  <div>
+                                    <span className="text-sm font-semibold text-gray-900">{item.name}</span>
                                     {item.availability && (
                                       <span className="ml-2 text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
                                         {item.availability}
                                       </span>
                                     )}
                                   </div>
-                                  <span className="text-sm sm:text-base font-bold text-amber-700 whitespace-nowrap">D{item.price}</span>
+                                  <span className="text-sm font-bold text-amber-700">D{item.price}</span>
                                 </div>
-                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                                <p className="text-xs text-gray-600 leading-relaxed">{item.description}</p>
                               </div>
                             </div>
                           </label>

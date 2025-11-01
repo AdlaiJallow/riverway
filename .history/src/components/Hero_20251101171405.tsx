@@ -27,9 +27,9 @@ export default function Hero({ setCurrentPage }: HeroProps) {
     <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-amber-50 min-h-screen flex items-center">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-gradient-to-br from-blue-200 to-blue-100 rounded-full mix-blend-multiply filter blur-2xl sm:blur-3xl opacity-20 sm:opacity-30 animate-float"></div>
-        <div className="absolute bottom-20 right-4 sm:right-10 w-56 sm:w-80 h-56 sm:h-80 bg-gradient-to-br from-amber-200 to-amber-100 rounded-full mix-blend-multiply filter blur-2xl sm:blur-3xl opacity-20 sm:opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 sm:left-1/3 w-40 sm:w-64 h-40 sm:h-64 bg-gradient-to-br from-green-200 to-blue-200 rounded-full mix-blend-multiply filter blur-xl sm:blur-3xl opacity-15 sm:opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-200 to-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-amber-200 to-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-green-200 to-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style={{ animationDelay: '4s' }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
@@ -58,21 +58,21 @@ export default function Hero({ setCurrentPage }: HeroProps) {
             </div>
 
             {/* Rotating Highlights */}
-            <div className="h-12 sm:h-16 flex items-center">
-              <div className="flex items-center space-x-2 sm:space-x-3 transition-all duration-500 overflow-x-auto">
+            <div className="h-16 flex items-center">
+              <div className="flex items-center space-x-3 transition-all duration-500">
                 {highlights.map((highlight, index) => {
                   const Icon = highlight.icon;
                   return (
                     <div 
                       key={index}
-                      className={`flex items-center space-x-1 sm:space-x-2 transition-all duration-500 whitespace-nowrap ${
+                      className={`flex items-center space-x-2 transition-all duration-500 ${
                         currentSlide === index 
                           ? 'opacity-100 scale-100 translate-x-0' 
                           : 'opacity-30 scale-95 translate-x-2'
                       }`}
                     >
-                      <Icon className={`w-4 sm:w-6 h-4 sm:h-6 ${highlight.color}`} />
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base">{highlight.text}</span>
+                      <Icon className={`w-6 h-6 ${highlight.color}`} />
+                      <span className="font-semibold text-gray-800">{highlight.text}</span>
                     </div>
                   );
                 })}

@@ -61,7 +61,7 @@ export default function Navigation({ currentPage, setCurrentPage }: NavigationPr
                     setCurrentPage(item.id);
                     setIsMenuOpen(false);
                   }}
-                  className={`block w-full text-left px-4 py-3 text-base font-medium rounded-md transition-colors touch-target ${
+                  className={`block w-full text-left px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     currentPage === item.id
                       ? 'text-amber-700 bg-amber-50'
                       : 'text-gray-600 hover:text-amber-700 hover:bg-amber-50'

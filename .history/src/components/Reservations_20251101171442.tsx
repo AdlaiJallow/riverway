@@ -341,7 +341,7 @@ export default function Reservations() {
           <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-500 rounded-full opacity-20 animate-float"></div>
           <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
           
-          <div className="relative bg-gradient-to-br from-white via-amber-50 to-blue-50 rounded-3xl shadow-2xl border border-amber-200 p-4 sm:p-6 lg:p-10">
+          <div className="relative bg-gradient-to-br from-white via-amber-50 to-blue-50 rounded-3xl shadow-2xl border border-amber-200 p-10">
           {submitted && (
             <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-green-800 font-medium">
@@ -379,7 +379,7 @@ export default function Reservations() {
                 <div className="w-16 h-1 bg-gradient-to-r from-amber-500 to-blue-500 rounded-full"></div>
               </div>
               
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="group">
                   <label className="block text-sm font-bold text-gray-900 mb-3">
                     <div className="flex items-center gap-3">
@@ -395,7 +395,7 @@ export default function Reservations() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-amber-200 focus:border-amber-500 outline-none transition-all duration-300 hover:border-amber-300 bg-white shadow-sm text-sm sm:text-base"
+                    className="w-full px-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-amber-200 focus:border-amber-500 outline-none transition-all duration-300 hover:border-amber-300 bg-white shadow-sm"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -530,9 +530,9 @@ export default function Reservations() {
                       <h4 className="font-semibold text-gray-900 mb-3 text-base border-b border-amber-200 pb-2">{category}</h4>
                       <div className="grid grid-cols-1 gap-3">
                         {categoryItems.map(item => (
-                            <label
+                          <label
                             key={item.id}
-                            className={`flex flex-col p-3 sm:p-4 border rounded-lg cursor-pointer transition-all touch-target ${
+                            className={`flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
                               formData.selectedMenuItems.includes(item.id)
                                 ? 'border-amber-500 bg-amber-50 text-amber-900'
                                 : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50'
@@ -543,21 +543,21 @@ export default function Reservations() {
                                 type="checkbox"
                                 checked={formData.selectedMenuItems.includes(item.id)}
                                 onChange={() => handleMenuSelection(item.id)}
-                                className="w-5 h-5 text-amber-600 bg-gray-100 border-gray-300 rounded focus:ring-amber-500 focus:ring-2 mr-3 mt-1 touch-target"
+                                className="w-4 h-4 text-amber-600 bg-gray-100 border-gray-300 rounded focus:ring-amber-500 focus:ring-2 mr-3 mt-1"
                               />
                               <div className="flex-1">
                                 <div className="flex justify-between items-start mb-2">
-                                  <div className="flex-1 pr-2">
-                                    <span className="text-sm sm:text-base font-semibold text-gray-900">{item.name}</span>
+                                  <div>
+                                    <span className="text-sm font-semibold text-gray-900">{item.name}</span>
                                     {item.availability && (
                                       <span className="ml-2 text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
                                         {item.availability}
                                       </span>
                                     )}
                                   </div>
-                                  <span className="text-sm sm:text-base font-bold text-amber-700 whitespace-nowrap">D{item.price}</span>
+                                  <span className="text-sm font-bold text-amber-700">D{item.price}</span>
                                 </div>
-                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                                <p className="text-xs text-gray-600 leading-relaxed">{item.description}</p>
                               </div>
                             </div>
                           </label>
@@ -625,13 +625,13 @@ export default function Reservations() {
               <label className="block text-sm font-bold text-gray-900 mb-3">
                 Tell us about any special requirements or preferences
               </label>
-                <textarea
+              <textarea
                 name="specialRequests"
                 value={formData.specialRequests}
                 onChange={handleChange}
-                rows={4}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-200 focus:border-green-500 outline-none transition-all duration-300 hover:border-green-300 bg-white shadow-sm resize-none text-sm sm:text-base"
-                placeholder="Share any dietary restrictions, special occasions, traditional dish preferences, or other special needs..."
+                rows={5}
+                className="w-full px-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-200 focus:border-green-500 outline-none transition-all duration-300 hover:border-green-300 bg-white shadow-sm resize-none"
+                placeholder="Share any dietary restrictions, special occasions, traditional dish preferences, seating requests, or other special needs..."
               ></textarea>
             </div>
 
@@ -644,11 +644,11 @@ export default function Reservations() {
                   : 'opacity-0 translate-y-8'
               }`}
             >
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
                 <button
                   type="submit"
                   disabled={loading || formData.selectedMenuItems.length === 0}
-                  className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold rounded-xl hover:from-amber-700 hover:to-amber-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden text-sm sm:text-base"
+                  className="group relative px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold rounded-xl hover:from-amber-700 hover:to-amber-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     <Mail className="w-5 h-5" />
@@ -661,7 +661,7 @@ export default function Reservations() {
                   type="button"
                   onClick={handleWhatsAppSubmit}
                   disabled={loading || formData.selectedMenuItems.length === 0}
-                  className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden text-sm sm:text-base"
+                  className="group relative px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     <MessageCircle className="w-5 h-5" />
@@ -698,16 +698,16 @@ export default function Reservations() {
               <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-amber-500 rounded-full"></div>
             </div>
             
-            <div className="grid sm:grid-cols-2 gap-6 lg:gap-8 mb-8">
-              <div className="space-y-4 sm:space-y-6">
-                <div className="bg-gradient-to-br from-blue-50 to-white p-4 sm:p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300">
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-3 mb-4">
-                    <Clock className="w-5 sm:w-6 h-5 sm:h-6 text-blue-600" />
-                    <h4 className="text-base sm:text-lg font-bold text-gray-900">Operating Hours</h4>
+                    <Clock className="w-6 h-6 text-blue-600" />
+                    <h4 className="text-lg font-bold text-gray-900">Operating Hours</h4>
                   </div>
                   <div className="space-y-2">
-                    <p className="text-sm sm:text-base text-gray-900 font-semibold">Saturday & Sunday: 11am - 10pm</p>
-                    <p className="text-sm sm:text-base text-gray-600">Weekdays: Closed</p>
+                    <p className="text-gray-900 font-semibold">Saturday & Sunday: 11am - 10pm</p>
+                    <p className="text-gray-600">Weekdays: Closed</p>
                   </div>
                 </div>
                 

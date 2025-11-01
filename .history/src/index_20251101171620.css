@@ -27,27 +27,6 @@
       }
     }
   }
-  
-  /* Mobile-first responsive text utilities */
-  .text-responsive-xs { font-size: 0.75rem; }
-  .text-responsive-sm { font-size: 0.875rem; }
-  .text-responsive-base { font-size: 1rem; }
-  .text-responsive-lg { font-size: 1.125rem; }
-  .text-responsive-xl { font-size: 1.25rem; }
-  
-  @media (min-width: 640px) {
-    .text-responsive-xs { font-size: 0.875rem; }
-    .text-responsive-sm { font-size: 1rem; }
-    .text-responsive-base { font-size: 1.125rem; }
-    .text-responsive-lg { font-size: 1.25rem; }
-    .text-responsive-xl { font-size: 1.5rem; }
-  }
-  
-  /* Improved mobile touch targets */
-  .touch-target {
-    min-height: 44px;
-    min-width: 44px;
-  }
 }
 
 @keyframes fade-in-up {

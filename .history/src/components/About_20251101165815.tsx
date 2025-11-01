@@ -195,18 +195,18 @@ export default function About() {
                   </span>
                 </div>
                 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
                   Our <span className="text-amber-300">Approach</span>
                 </h2>
                 
                 <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-blue-400 rounded-full mx-auto mb-8"></div>
                 
-                <p className="text-lg sm:text-xl md:text-2xl text-blue-100 leading-relaxed mb-8 font-light">
+                <p className="text-xl md:text-2xl text-blue-100 leading-relaxed mb-8 font-light">
                   Riverway embodies the spirit of <span className="font-semibold text-amber-300">authenticity</span>, 
                   rooted in tradition, and ever-flowing with new flavors and experiences.
                 </p>
                 
-                <p className="text-base sm:text-lg text-blue-200 leading-relaxed max-w-3xl mx-auto">
+                <p className="text-lg text-blue-200 leading-relaxed max-w-3xl mx-auto">
                   Every dish we serve is a celebration of Gambian heritage, prepared with passion and presented with pride. 
                   We invite you to experience the journey of tastes that tell the story of our nation's rich culinary heritage.
                 </p>
