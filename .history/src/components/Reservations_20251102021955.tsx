@@ -741,10 +741,8 @@ export default function Reservations() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 }
