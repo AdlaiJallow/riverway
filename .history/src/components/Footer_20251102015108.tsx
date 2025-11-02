@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
   setCurrentPage: (page: string) => void;

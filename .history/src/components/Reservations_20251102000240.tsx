@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabase';
-import { Calendar, Clock, Phone, User, MessageCircle, ChefHat, Star, Sparkles, MapPin, Info } from 'lucide-react';
+import { Calendar, Clock, Mail, Phone, User, MessageCircle, ChefHat, Star, Sparkles, MapPin, Info } from 'lucide-react';
 import { sendReservationEmail, sendWhatsAppNotification } from '../lib/emailService';
 
 export default function Reservations() {
@@ -204,13 +204,13 @@ export default function Reservations() {
     setError('');
 
     try {
-      // Process order submission (email functionality disabled)
+      // Send email notification using our email service
       const totalAmount = calculateTotal();
       const selectedItemsWithPrices = getSelectedItemsWithPrices();
       const emailSent = await sendReservationEmail(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number}>);
 
       if (!emailSent) {
-        throw new Error('Order submission failed');
+        throw new Error('Email sending failed');
       }
 
       // Also try to save to Supabase if configured (optional backup)
@@ -233,7 +233,7 @@ export default function Reservations() {
           console.warn('Supabase save failed (using mock):', submitError);
         }
       } catch (dbError) {
-        console.warn('Database save failed, but order was processed:', dbError);
+        console.warn('Database save failed, but email was sent:', dbError);
       }
 
       setSubmitted(true);
@@ -462,6 +462,7 @@ export default function Reservations() {
                     <option value="delivery">Delivery (30-45 minutes)</option>
                     <option value="pickup">Pickup (15-20 minutes)</option>
                   </select>
+                  <p className="text-sm text-blue-700 mt-2 font-medium">� Free delivery on orders over D300</p>
                 </div>
               </div>
             </div>
@@ -630,7 +631,7 @@ export default function Reservations() {
                   className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold rounded-xl hover:from-amber-700 hover:to-amber-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden text-sm sm:text-base"
                 >
                   <span className="relative z-10 flex items-center gap-3">
-                    <Phone className="w-5 h-5" />
+                    <Mail className="w-5 h-5" />
                     {loading ? 'Placing Order...' : 'Submit Order'}
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-amber-700 to-amber-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -668,18 +669,28 @@ export default function Reservations() {
             }`}
           >
             <div className="mb-8">
-              <div className="text-center mb-8">
-                <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="flex items-center space-x-3 mb-4">
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-amber-500 rounded-full flex items-center justify-center">
                     <Info className="w-4 h-4 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">Delivery & Contact Information</h3>
                 </div>
-                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-amber-500 rounded-full mx-auto"></div>
-              </div>
+              <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-amber-500 rounded-full"></div>
+            </div>
             
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-8">
-                {/* Location */}
+            <div className="grid sm:grid-cols-2 gap-6 lg:gap-8 mb-8">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="bg-gradient-to-br from-blue-50 to-white p-4 sm:p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Clock className="w-5 sm:w-6 h-5 sm:h-6 text-blue-600" />
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900">Operating Hours</h4>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm sm:text-base text-gray-900 font-semibold">Saturday & Sunday: 11am - 10pm</p>
+                    <p className="text-sm sm:text-base text-gray-600">Weekdays: Closed</p>
+                  </div>
+                </div>
+                
                 <div className="bg-gradient-to-br from-amber-50 to-white p-6 rounded-2xl border border-amber-100 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-3 mb-4">
                     <MapPin className="w-6 h-6 text-amber-600" />
@@ -691,8 +702,9 @@ export default function Reservations() {
                     <p className="text-gray-600 text-sm">The Gambia</p>
                   </div>
                 </div>
-
-                {/* Phone Numbers */}
+              </div>
+              
+              <div className="space-y-6">
                 <div className="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-3 mb-4">
                     <Phone className="w-6 h-6 text-green-600" />
@@ -703,18 +715,13 @@ export default function Reservations() {
                     <p className="text-gray-900 font-semibold">+220 9957606</p>
                   </div>
                 </div>
-
-                {/* Operating Hours */}
-                <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300">
+                
+                <div className="bg-gradient-to-br from-purple-50 to-white p-6 rounded-2xl border border-purple-100 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-3 mb-4">
-                    <Clock className="w-6 h-6 text-blue-600" />
-                    <h4 className="text-lg font-bold text-gray-900">Operating Hours</h4>
+                    <Mail className="w-6 h-6 text-purple-600" />
+                    <h4 className="text-lg font-bold text-gray-900">Email</h4>
                   </div>
-                  <div className="space-y-2">
-                    <p className="text-gray-900 font-semibold">Saturday & Sunday</p>
-                    <p className="text-blue-600 font-semibold">11am - 10pm</p>
-                    <p className="text-gray-600">Weekdays: Closed</p>
-                  </div>
+                  <p className="text-gray-900 font-medium text-sm">fatoukinnehcorr@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -726,6 +733,10 @@ export default function Reservations() {
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm opacity-90">Free delivery on orders over D300 within 10km radius</p>
+                  </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-yellow-300 rounded-full mt-2 flex-shrink-0"></div>
                     <p className="text-sm opacity-90">Large orders (10+ items) may require extra preparation time</p>

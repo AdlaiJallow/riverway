@@ -2,6 +2,7 @@
 
 interface OrderData {
   name: string;
+  email: string;
   phone: string;
   address: string;
   orderType: 'delivery' | 'pickup';
