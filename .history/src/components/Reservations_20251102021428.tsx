@@ -677,42 +677,50 @@ export default function Reservations() {
               <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-amber-500 rounded-full"></div>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-8">
-              {/* Operating Hours */}
-              <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-6 h-6 text-blue-600" />
-                  <h4 className="text-lg font-bold text-gray-900">Operating Hours</h4>
+            <div className="grid sm:grid-cols-2 gap-6 lg:gap-8 mb-8">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="bg-gradient-to-br from-blue-50 to-white p-4 sm:p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Clock className="w-5 sm:w-6 h-5 sm:h-6 text-blue-600" />
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900">Operating Hours</h4>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm sm:text-base text-gray-900 font-semibold">Saturday & Sunday: 11am - 10pm</p>
+                    <p className="text-sm sm:text-base text-gray-600">Weekdays: Closed</p>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-gray-900 font-semibold">Saturday & Sunday</p>
-                  <p className="text-blue-600 font-bold">11am - 10pm</p>
-                  <p className="text-gray-600 text-sm">Weekdays: Closed</p>
+                
+                <div className="bg-gradient-to-br from-amber-50 to-white p-6 rounded-2xl border border-amber-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <MapPin className="w-6 h-6 text-amber-600" />
+                    <h4 className="text-lg font-bold text-gray-900">Location</h4>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-gray-900 font-medium">Brusubi Phase 2</p>
+                    <p className="text-gray-700">Opposite Police Station</p>
+                    <p className="text-gray-600 text-sm">The Gambia</p>
+                  </div>
                 </div>
               </div>
-
-              {/* Location */}
-              <div className="bg-gradient-to-br from-amber-50 to-white p-6 rounded-2xl border border-amber-100 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <MapPin className="w-6 h-6 text-amber-600" />
-                  <h4 className="text-lg font-bold text-gray-900">Location</h4>
+              
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Phone className="w-6 h-6 text-green-600" />
+                    <h4 className="text-lg font-bold text-gray-900">Phone Numbers</h4>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-gray-900 font-semibold">+220 3939528</p>
+                    <p className="text-gray-900 font-semibold">+220 9957606</p>
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-gray-900 font-medium">Brusubi Phase 2</p>
-                  <p className="text-gray-700">Opposite Police Station</p>
-                  <p className="text-gray-600 text-sm">The Gambia</p>
-                </div>
-              </div>
-
-              {/* Phone Numbers */}
-              <div className="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <Phone className="w-6 h-6 text-green-600" />
-                  <h4 className="text-lg font-bold text-gray-900">Contact</h4>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-gray-900 font-semibold">+220 3939528</p>
-                  <p className="text-gray-900 font-semibold">+220 9957606</p>
+                
+                <div className="bg-gradient-to-br from-purple-50 to-white p-6 rounded-2xl border border-purple-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Phone className="w-6 h-6 text-purple-600" />
+                    <h4 className="text-lg font-bold text-gray-900">Phone</h4>
+                  </div>
+                  <p className="text-gray-900 font-medium text-sm">+220 3939528 / +220 9957606</p>
                 </div>
               </div>
             </div>
