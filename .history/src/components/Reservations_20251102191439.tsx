@@ -618,27 +618,18 @@ export default function Reservations() {
                   </div>
                   
                   <div className="space-y-2 mb-4">
-                    {getSelectedItemsWithPrices().map((item, index) => {
-                      if (!item) return null;
-                      const quantity = item.quantity || 1;
-                      const itemTotal = item.price * quantity;
-                      
-                      return (
+                    {getSelectedItemsWithPrices().map((item, index) => (
+                      item && (
                         <div key={index} className="flex justify-between items-center text-sm">
-                          <div className="flex flex-col">
-                            <span className="text-amber-800 font-medium">• {item.name}</span>
-                            {quantity > 1 && (
-                              <span className="text-amber-600 text-xs ml-2">
-                                D{item.price} × {quantity}
-                              </span>
-                            )}
-                          </div>
+                          <span className="text-amber-800 font-medium">
+                            • {item.name} {item.quantity && item.quantity > 1 ? `(x${item.quantity})` : ''}
+                          </span>
                           <span className="text-amber-700 font-semibold">
-                            D{itemTotal}
+                            D{item.price * (item.quantity || 1)}
                           </span>
                         </div>
-                      );
-                    })}
+                      )
+                    ))}
                   </div>
 
                   <div className="border-t border-amber-300 pt-3">

@@ -245,7 +245,7 @@ export default function Reservations() {
       // Process order submission (email functionality disabled)
       const totalAmount = calculateTotal();
       const selectedItemsWithPrices = getSelectedItemsWithPrices();
-      const emailSent = await sendReservationEmail(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number, quantity?: number}>);
+      const emailSent = await sendReservationEmail(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number}>);
 
       if (!emailSent) {
         throw new Error('Order submission failed');
@@ -304,7 +304,7 @@ export default function Reservations() {
     setError('');
     const totalAmount = calculateTotal();
     const selectedItemsWithPrices = getSelectedItemsWithPrices();
-    sendWhatsAppNotification(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number, quantity?: number}>);
+    sendWhatsAppNotification(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number}>);
     
     // Show success message and clear form
     setSubmitted(true);
@@ -548,60 +548,39 @@ export default function Reservations() {
                     <div key={category}>
                       <h4 className="font-semibold text-gray-900 mb-3 text-base border-b border-amber-200 pb-2">{category}</h4>
                       <div className="grid grid-cols-1 gap-3">
-                        {categoryItems.map(item => {
-                          const quantity = formData.menuQuantities[item.id] || 0;
-                          const isSelected = quantity > 0;
-                          
-                          return (
-                            <div
-                              key={item.id}
-                              className={`flex flex-col p-3 sm:p-4 border rounded-lg transition-all ${
-                                isSelected
-                                  ? 'border-amber-500 bg-amber-50 text-amber-900'
-                                  : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50'
-                              }`}
-                            >
-                              <div className="flex items-start justify-between">
-                                <div className="flex-1 pr-3">
-                                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                                    <div className="flex-1">
-                                      <span className="text-sm sm:text-base font-semibold text-gray-900">{item.name}</span>
-                                      {item.availability && (
-                                        <span className="ml-2 text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
-                                          {item.availability}
-                                        </span>
-                                      )}
-                                    </div>
-                                    <span className="text-sm sm:text-base font-bold text-amber-700 whitespace-nowrap mt-1 sm:mt-0">D{item.price}</span>
+                        {categoryItems.map(item => (
+                            <label
+                            key={item.id}
+                            className={`flex flex-col p-3 sm:p-4 border rounded-lg cursor-pointer transition-all touch-target ${
+                              formData.selectedMenuItems.includes(item.id)
+                                ? 'border-amber-500 bg-amber-50 text-amber-900'
+                                : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50'
+                            }`}
+                          >
+                            <div className="flex items-start">
+                              <input
+                                type="checkbox"
+                                checked={formData.selectedMenuItems.includes(item.id)}
+                                onChange={() => handleMenuSelection(item.id)}
+                                className="w-5 h-5 text-amber-600 bg-gray-100 border-gray-300 rounded focus:ring-amber-500 focus:ring-2 mr-3 mt-1 touch-target"
+                              />
+                              <div className="flex-1">
+                                <div className="flex justify-between items-start mb-2">
+                                  <div className="flex-1 pr-2">
+                                    <span className="text-sm sm:text-base font-semibold text-gray-900">{item.name}</span>
+                                    {item.availability && (
+                                      <span className="ml-2 text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
+                                        {item.availability}
+                                      </span>
+                                    )}
                                   </div>
-                                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                                  <span className="text-sm sm:text-base font-bold text-amber-700 whitespace-nowrap">D{item.price}</span>
                                 </div>
-                                
-                                {/* Quantity Controls */}
-                                <div className="flex items-center gap-3 ml-2">
-                                  <button
-                                    type="button"
-                                    onClick={() => updateQuantity(item.id, -1)}
-                                    disabled={quantity === 0}
-                                    className="w-8 h-8 rounded-full border border-amber-300 bg-white flex items-center justify-center text-amber-600 hover:bg-amber-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all touch-target"
-                                  >
-                                    -
-                                  </button>
-                                  <span className="min-w-[2rem] text-center font-semibold text-gray-900">
-                                    {quantity}
-                                  </span>
-                                  <button
-                                    type="button"
-                                    onClick={() => updateQuantity(item.id, 1)}
-                                    className="w-8 h-8 rounded-full border border-amber-300 bg-amber-500 flex items-center justify-center text-white hover:bg-amber-600 transition-all touch-target"
-                                  >
-                                    +
-                                  </button>
-                                </div>
+                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{item.description}</p>
                               </div>
                             </div>
-                          );
-                        })}
+                          </label>
+                        ))}
                       </div>
                     </div>
                   );
@@ -618,27 +597,14 @@ export default function Reservations() {
                   </div>
                   
                   <div className="space-y-2 mb-4">
-                    {getSelectedItemsWithPrices().map((item, index) => {
-                      if (!item) return null;
-                      const quantity = item.quantity || 1;
-                      const itemTotal = item.price * quantity;
-                      
-                      return (
+                    {getSelectedItemsWithPrices().map((item, index) => (
+                      item && (
                         <div key={index} className="flex justify-between items-center text-sm">
-                          <div className="flex flex-col">
-                            <span className="text-amber-800 font-medium">• {item.name}</span>
-                            {quantity > 1 && (
-                              <span className="text-amber-600 text-xs ml-2">
-                                D{item.price} × {quantity}
-                              </span>
-                            )}
-                          </div>
-                          <span className="text-amber-700 font-semibold">
-                            D{itemTotal}
-                          </span>
+                          <span className="text-amber-800 font-medium">• {item.name}</span>
+                          <span className="text-amber-700 font-semibold">D{item.price}</span>
                         </div>
-                      );
-                    })}
+                      )
+                    ))}
                   </div>
 
                   <div className="border-t border-amber-300 pt-3">

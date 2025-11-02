@@ -23,13 +23,9 @@ export const sendWhatsAppNotification = (orderData: OrderData, totalAmount: numb
   
   const orderTypeText = orderData.orderType === 'delivery' ? 'Delivery' : 'Pickup';
   
-  // Format selected items with quantities and prices
+  // Format selected items with prices
   const itemsText = selectedItemsWithPrices.length > 0 
-    ? selectedItemsWithPrices.map(item => {
-        const quantity = item.quantity || 1;
-        const itemTotal = item.price * quantity;
-        return `${item.name} ${quantity > 1 ? `(x${quantity})` : ''} - D${itemTotal}`;
-      }).join('\n')
+    ? selectedItemsWithPrices.map(item => `${item.name} - D${item.price}`).join('\n')
     : 'No items selected';
 
   const message = `
