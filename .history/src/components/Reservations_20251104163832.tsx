@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Clock, Phone, User, MessageCircle, ChefHat, Star, MapPin, Info } from 'lucide-react';
+import { Calendar, Clock, Phone, User, MessageCircle, ChefHat, Star, Sparkles, MapPin, Info } from 'lucide-react';
 import { sendWhatsAppNotification } from '../lib/emailService';
 
 export default function Reservations() {

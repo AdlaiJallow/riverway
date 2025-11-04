@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Clock, Phone, User, MessageCircle, ChefHat, Star, MapPin, Info } from 'lucide-react';
+import { Calendar, Clock, Phone, User, MessageCircle, ChefHat, Star, Sparkles, MapPin, Info } from 'lucide-react';
 import { sendWhatsAppNotification } from '../lib/emailService';
 
 export default function Reservations() {
@@ -170,7 +170,27 @@ export default function Reservations() {
     }));
   };
 
-
+  const handleMenuSelection = (itemId: string) => {
+    setFormData(prev => {
+      const isSelected = prev.selectedMenuItems.includes(itemId);
+      const newSelection = isSelected
+        ? prev.selectedMenuItems.filter(id => id !== itemId)
+        : [...prev.selectedMenuItems, itemId];
+      
+      const newQuantities = { ...prev.menuQuantities };
+      if (isSelected) {
+        delete newQuantities[itemId];
+      } else {
+        newQuantities[itemId] = 1;
+      }
+      
+      return {
+        ...prev,
+        selectedMenuItems: newSelection,
+        menuQuantities: newQuantities,
+      };
+    });
+  };
 
   const updateQuantity = (itemId: string, change: number) => {
     setFormData(prev => {

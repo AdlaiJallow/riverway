@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { Clock, Phone, User, MessageCircle, ChefHat, Star, MapPin, Info } from 'lucide-react';
-import { sendWhatsAppNotification } from '../lib/emailService';
+import { supabase } from '../lib/supabase';
+import { Calendar, Clock, Phone, User, MessageCircle, ChefHat, Star, Sparkles, MapPin, Info } from 'lucide-react';
+import { sendReservationEmail, sendWhatsAppNotification } from '../lib/emailService';
 
 export default function Reservations() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
@@ -158,7 +159,7 @@ export default function Reservations() {
     },
   ];
 
-
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
@@ -170,7 +171,27 @@ export default function Reservations() {
     }));
   };
 
-
+  const handleMenuSelection = (itemId: string) => {
+    setFormData(prev => {
+      const isSelected = prev.selectedMenuItems.includes(itemId);
+      const newSelection = isSelected
+        ? prev.selectedMenuItems.filter(id => id !== itemId)
+        : [...prev.selectedMenuItems, itemId];
+      
+      const newQuantities = { ...prev.menuQuantities };
+      if (isSelected) {
+        delete newQuantities[itemId];
+      } else {
+        newQuantities[itemId] = 1;
+      }
+      
+      return {
+        ...prev,
+        selectedMenuItems: newSelection,
+        menuQuantities: newQuantities,
+      };
+    });
+  };
 
   const updateQuantity = (itemId: string, change: number) => {
     setFormData(prev => {
@@ -215,7 +236,63 @@ export default function Reservations() {
     }).filter(Boolean);
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
+    try {
+      // Process order submission (email functionality disabled)
+      const totalAmount = calculateTotal();
+      const selectedItemsWithPrices = getSelectedItemsWithPrices();
+      const emailSent = await sendReservationEmail(formData, totalAmount, selectedItemsWithPrices as Array<{name: string, price: number, quantity?: number}>);
+
+      if (!emailSent) {
+        throw new Error('Order submission failed');
+      }
+
+      // Also try to save to Supabase if configured (optional backup)
+      try {
+        const { error: submitError } = await supabase
+          .from('orders')
+          .insert([
+            {
+              name: formData.name,
+              phone: formData.phone,
+              address: formData.address,
+              order_type: formData.orderType,
+              selected_menu_items: formData.selectedMenuItems.join(', '),
+              special_requests: formData.specialRequests,
+              total_amount: calculateTotal(),
+            },
+          ]);
+
+        if (submitError) {
+          console.warn('Supabase save failed (using mock):', submitError);
+        }
+      } catch (dbError) {
+        console.warn('Database save failed, but order was processed:', dbError);
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        phone: '',
+        address: '',
+        orderType: 'delivery' as 'delivery' | 'pickup',
+        selectedMenuItems: [],
+        menuQuantities: {},
+        specialRequests: '',
+      });
+
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      setError('Failed to submit order. Please try again or call us directly at +220 3939528.');
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Alternative submission via WhatsApp
   const handleWhatsAppSubmit = () => {
@@ -322,7 +399,7 @@ export default function Reservations() {
             </div>
           )}
 
-          <div className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* Personal Information Section */}
             <div 
               ref={setRef('personal')}
@@ -636,7 +713,7 @@ export default function Reservations() {
                 <button
                   type="button"
                   onClick={handleWhatsAppSubmit}
-                  disabled={formData.selectedMenuItems.length === 0}
+                  disabled={loading || formData.selectedMenuItems.length === 0}
                   className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden text-sm sm:text-base"
                 >
                   <span className="relative z-10 flex items-center gap-3">
@@ -653,7 +730,7 @@ export default function Reservations() {
                 </p>
               </div>
             </div>
-          </div>
+          </form>
 
           {/* Restaurant Information */}
           <div 

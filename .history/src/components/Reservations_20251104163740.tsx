@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Clock, Phone, User, MessageCircle, ChefHat, Star, MapPin, Info } from 'lucide-react';
+import { Calendar, Clock, Phone, User, MessageCircle, ChefHat, Star, Sparkles, MapPin, Info } from 'lucide-react';
 import { sendWhatsAppNotification } from '../lib/emailService';
 
 export default function Reservations() {
@@ -170,7 +170,27 @@ export default function Reservations() {
     }));
   };
 
-
+  const handleMenuSelection = (itemId: string) => {
+    setFormData(prev => {
+      const isSelected = prev.selectedMenuItems.includes(itemId);
+      const newSelection = isSelected
+        ? prev.selectedMenuItems.filter(id => id !== itemId)
+        : [...prev.selectedMenuItems, itemId];
+      
+      const newQuantities = { ...prev.menuQuantities };
+      if (isSelected) {
+        delete newQuantities[itemId];
+      } else {
+        newQuantities[itemId] = 1;
+      }
+      
+      return {
+        ...prev,
+        selectedMenuItems: newSelection,
+        menuQuantities: newQuantities,
+      };
+    });
+  };
 
   const updateQuantity = (itemId: string, change: number) => {
     setFormData(prev => {
@@ -636,7 +656,7 @@ export default function Reservations() {
                 <button
                   type="button"
                   onClick={handleWhatsAppSubmit}
-                  disabled={formData.selectedMenuItems.length === 0}
+                  disabled={loading || formData.selectedMenuItems.length === 0}
                   className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 overflow-hidden text-sm sm:text-base"
                 >
                   <span className="relative z-10 flex items-center gap-3">
