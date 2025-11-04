@@ -311,7 +311,7 @@ export default function Reservations() {
                 ✅ Thank you for your order! Your order has been sent directly to our kitchen team at adlaijallow@gmail.com. We'll contact you within 15 minutes to confirm your order and provide estimated preparation time.
               </p>
               <p className="text-green-700 text-sm mt-2">
-                Order Total: <span className="font-bold">D{calculateTotal()}</span> • Order Type: {formData.orderType}
+                Order Total: <span className="font-bold">D{calculateTotal()}</span> • Estimated time: {formData.orderType === 'delivery' ? '30-45 minutes' : '15-20 minutes'}
               </p>
             </div>
           )}
